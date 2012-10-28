@@ -8,12 +8,12 @@ Source0:	http://downloads.sourceforge.net/project/dbus-cplusplus/dbus-c++/0.9.0/
 # Source0-md5:	e752116f523fa88ef041e63d3dee4de2
 Patch0:		%{name}-undefined_reference.patch
 Patch1:		%{name}-gcc47.patch
-BuildRequires:	glib-devel
-BuildRequires:	pkg-config
-BuildRequires:	dbus-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	dbus-devel
+BuildRequires:	glib-devel
 BuildRequires:	libtool
+BuildRequires:	pkg-config
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # should be linked to dbus-c++
@@ -62,7 +62,9 @@ library.
 %{__automake}
 %configure \
 	--disable-static	\
-	--enable-ecore=no
+	--enable-ecore=no	\
+	--enable-examples=no	\
+	--enable-tests=no
 %{__make}
 
 %install
@@ -75,11 +77,11 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-p /sbin/ldconfig
-%postun	-p /sbin/ldconfig
+%post	-p /usr/sbin/ldconfig
+%postun	-p /usr/sbin/ldconfig
 
-%post	glib -p /sbin/ldconfig
-%postun	glib -p /sbin/ldconfig
+%post	glib -p /usr/sbin/ldconfig
+%postun	glib -p /usr/sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
