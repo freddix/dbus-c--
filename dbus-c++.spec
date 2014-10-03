@@ -1,7 +1,7 @@
 Summary:	DBus-C++ Library Public API Calls
 Name:		dbus-c++
 Version:	0.9.0
-Release:	2
+Release:	3
 License:	LGPL
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/project/dbus-cplusplus/dbus-c++/0.9.0/lib%{name}-%{version}.tar.gz
@@ -69,10 +69,11 @@ library.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-#install -d $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
